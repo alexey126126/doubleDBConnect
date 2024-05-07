@@ -11,12 +11,12 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import javax.sql.DataSource;
 
 @Configuration
-//@EnableJpaRepositories(
-//        basePackageClasses = Todo.class,
-//        entityManagerFactoryRef = "todosEntityManagerFactory",
-//        transactionManagerRef = "todosTransactionManager"
-//)
-//@ConfigurationProperties("spring.datasource.todos")
+@EnableJpaRepositories(
+        basePackageClasses = Todo.class,
+        entityManagerFactoryRef = "todosEntityManagerFactory",
+        transactionManagerRef = "todosTransactionManager"
+)
+@ConfigurationProperties("spring.datasource.todos")
 public class TodoDatasourceConfiguration {
 
     @Bean("todosProperties")
@@ -32,4 +32,11 @@ public class TodoDatasourceConfiguration {
                 .initializeDataSourceBuilder()
                 .build();
     }
+
+//    @Bean
+//    public DataSource todosDataSource() {
+//        return todosDataSourceProperties()
+//                .initializeDataSourceBuilder()
+//                .build();
+//    }
 }

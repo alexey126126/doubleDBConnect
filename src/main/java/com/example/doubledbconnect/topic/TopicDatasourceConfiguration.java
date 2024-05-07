@@ -10,22 +10,24 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 import javax.sql.DataSource;
 
+import org.springframework.boot.autoconfigure.jdbc.DataSourceProperties;
+import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+
+import javax.sql.DataSource;
+
 @Configuration
-@ConfigurationProperties("spring.datasource.topics")
-//@EnableJpaRepositories(
-//        basePackageClasses = Todo.class,
-//        entityManagerFactoryRef = "todosEntityManagerFactory",
-//        transactionManagerRef = "todosTransactionManager"
-//)
 public class TopicDatasourceConfiguration {
 
-    @Bean("topicsProperties")
+    @Bean
+    @ConfigurationProperties("spring.datasource.topics")
     public DataSourceProperties topicsDataSourceProperties() {
         return new DataSourceProperties();
     }
 
-    @Bean("topicsDataSource")
-    public DataSource topicsDataSource(@Qualifier("topicsProperties") DataSourceProperties topicsDataSourceProperties) {
+    @Bean
+    public DataSource topicsDataSource() {
         return topicsDataSourceProperties()
                 .initializeDataSourceBuilder()
                 .build();
